@@ -9,7 +9,10 @@ function line() {
                 title: {
                     text: '曲线图数据展示',
                     left: "center",
-                    padding:[15,0]
+                    padding:[20,0],
+                    textStyle:{
+                        fontWeight:'400'
+                    }
                 },
                 tooltip: {},
                 xAxis: {
@@ -29,7 +32,13 @@ function line() {
                             }
                         }
                     }
-                }]
+                }],
+                grid:{
+                    y:100,
+                    x:100,
+                    x2:80,
+                    y2:60
+                }
             })
         }
     }
@@ -54,13 +63,17 @@ function pie() {
                 title: {
                     text: '饼状图数据展示',
                     left: "center",
-                    padding:[20,0]
+                    padding:[20,0],
+                    textStyle:{
+                        fontWeight:'400'
+                    }
                 },
                 tooltip: {},
                 series: [{
                     name: "销量",
                     type: 'pie',
                     radius: '55%',
+                    center:['50%','55%'],
                     data: seriesData
                 }]
             })
@@ -80,7 +93,11 @@ function bar() {
             myChart.setOption({
                 title: {
                     text: '柱状图数据显示',
-                    left: 'center'
+                    left: 'center',
+                    padding:[20,0],
+                    textStyle:{
+                        fontWeight:'400'
+                    }
                 },
                 tooltip: {},
                 xAxis: {
@@ -99,7 +116,13 @@ function bar() {
                             color: '#4587f0'
                         }
                     }
-                }]
+                }],
+                grid:{
+                    y:100,
+                    x:100,
+                    x2:80,
+                    y2:60
+                }
             })
         }
     }
