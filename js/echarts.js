@@ -1,83 +1,108 @@
 //*****曲线图
-var myChart1 = echarts.init(document.querySelector('.box2'));
-$.get('https://edu.telking.com/api/?type=month', function (data) {
-    myChart1.setOption({
-        title: {
-            text: '曲线图数据展示',
-            left: "center"
-        },
-        tooltip: {},
-        xAxis: {
-            data: data.data.xAxis
-        },
-        yAxis: {},
-        series: [{
-            type: 'line',
-            data: data.data.series,
-            smooth: true,
-            areaStyle: {},
-            itemStyle: {
-                normal: {
-                    color: "#4b8af0",
-                    label: {
-                        show: true
+function line() {
+    var xmlhttp = new XMLHttpRequest(),
+        myChart = echarts.init(document.querySelector('.box2'))
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var data = JSON.parse(xmlhttp.responseText).data
+            myChart.setOption({
+                title: {
+                    text: '曲线图数据展示',
+                    left: "center",
+                    padding:[15,0]
+                },
+                tooltip: {},
+                xAxis: {
+                    data: data.xAxis
+                },
+                yAxis: {},
+                series: [{
+                    type: 'line',
+                    data: data.series,
+                    smooth: true,
+                    areaStyle: {},
+                    itemStyle: {
+                        normal: {
+                            color: "#4b8af0",
+                            label: {
+                                show: true
+                            }
+                        }
                     }
-                }
-            }
-        }]
-    })
-})
+                }]
+            })
+        }
+    }
+    xmlhttp.open('GET', 'https://edu.telking.com/api/?type=month', true)
+    xmlhttp.send()
+}
 
 //*****饼状图
-var myChart2 = echarts.init(document.querySelector('.pie'));
-$.get('https://edu.telking.com/api/?type=week', function (data) {
-    var seriesData = [];
-    var seriesName = data.data.xAxis;
-    var seriesValue = data.data.series;
-    for (var i in seriesName) {
-        seriesData.push({ name: seriesName[i], value: seriesValue[i] })
+function pie() {
+    var xmlhttp = new XMLHttpRequest(),
+        myChart = echarts.init(document.querySelector('.pie'))
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var data = JSON.parse(xmlhttp.responseText).data,
+                seriesData = []
+            seriesName = data.xAxis
+            seriesValue = data.series
+            for (var i in seriesName) {
+                seriesData.push({ name: seriesName[i], value: seriesValue[i] })
+            }
+            myChart.setOption({
+                title: {
+                    text: '饼状图数据展示',
+                    left: "center",
+                    padding:[20,0]
+                },
+                tooltip: {},
+                series: [{
+                    name: "销量",
+                    type: 'pie',
+                    radius: '55%',
+                    data: seriesData
+                }]
+            })
+        }
     }
-    myChart2.setOption({
-        title: {
-            text: '饼状图数据展示',
-            left: "center"
-        },
-        tooltip: {},
-        series: [{
-            name: "销量",
-            type: 'pie',
-            radius: '55%',
-            data: seriesData
-        }]
-
-    })
-})
+    xmlhttp.open('GET', 'https://edu.telking.com/api/?type=week', true)
+    xmlhttp.send()
+}
 
 //*****柱状图
-var myChart3 = echarts.init(document.querySelector('.bar'));
-$.get('https://edu.telking.com/api/?type=week', function (data) {
-    myChart3.setOption({
-        title: {
-            text: '柱状图数据显示',
-            left: 'center'
-        },
-        tooltip: {},
-        xAxis: {
-            data: data.data.xAxis
-        },
-        yAxis: {
-            name: '商品数'
-        },
-        series: [{
-            name: '商品数',
-            type: 'bar',
-            barWidth: 18,
-            data: data.data.series,
-            itemStyle: {
-                normal: {
-                    color: '#4587f0'
-                }
-            }
-        }]
-    })
-})
+function bar() {
+    var xmlhttp = new XMLHttpRequest(),
+        myChart = echarts.init(document.querySelector('.bar'));
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var data = JSON.parse(xmlhttp.responseText).data
+            myChart.setOption({
+                title: {
+                    text: '柱状图数据显示',
+                    left: 'center'
+                },
+                tooltip: {},
+                xAxis: {
+                    data: data.xAxis
+                },
+                yAxis: {
+                    name: '商品数'
+                },
+                series: [{
+                    name: '商品数',
+                    type: 'bar',
+                    barWidth: 18,
+                    data: data.series,
+                    itemStyle: {
+                        normal: {
+                            color: '#4587f0'
+                        }
+                    }
+                }]
+            })
+        }
+    }
+    xmlhttp.open('GET', 'https://edu.telking.com/api/?type=week', true)
+    xmlhttp.send()
+}

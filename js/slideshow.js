@@ -6,6 +6,9 @@ window.onload = function () {
         list = document.getElementById('list').getElementsByTagName('li'),
         index = 0,
         timer = null;
+        line();
+        pie();
+        bar()
 
     // 定义并调用自动播放函数
     timer = setInterval(autoPlay, 2000);
@@ -28,7 +31,7 @@ window.onload = function () {
         list[i].onmouseover = function () {
             console.log(this.index);
             changePic(this.index);
-            index=this.index  //索引重新赋值
+            index = this.index  //索引重新赋值
         };
     };
 
